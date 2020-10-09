@@ -1,0 +1,77 @@
+.TweetTile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid dimgrey;
+	border-radius: 5px;
+	width: 50%;
+	font-size: calc(5px + 2vmin);
+	color: white;
+	background-color: dimgrey;
+	cursor: pointer;
+	transition: transform 0.5s;
+    min-width: 300px;
+    text-overflow: ellipsis;
+}
+.TweetTileContainer{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 95%;
+    min-width: 300px;
+    text-overflow: ellipsis;
+}
+.AccountTile{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin: 0px;
+}
+.AccountTileUserImage{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    padding: 10px;
+}
+.VerifiedImage{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 10px;
+}
+.Searchbar{
+    width: 40%;
+    height: 50px;
+    border-radius: 10px;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+    padding-left: 15px;
+}
+.Searchbar:focus{
+    outline: none;
+}
+.SubmitTile{
+    margin-left: -50px;
+    margin-top: 1px;
+    height: 55px;
+    width: 12%;
+    background: blue;
+    color: white;
+    border: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+    font-size: 2vw;
+}
+.SubmitTile:focus{
+    outline: none;
+}
+.SearchbarDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+}
