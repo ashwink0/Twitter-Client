@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../App.css';
 import {CircularProgress, LinearProgress} from '@material-ui/core';
 import TweetTile from "../components/TweetTile";
@@ -15,13 +14,27 @@ class Main extends React.Component {
 			user: {},
 			response: 0,
 			ready: false,
-			readyUser: false
+			readyUser: false,
+
+			passedUser:false
 		}
 	}
 
 	componentDidMount() {
+		let username;
+		if(this.props.match.params.username){
+			username=this.props.match.params.username;
+			this.setState({
+				passedUser:true
+			})
+		}
+		else{
+			//temp
+			username='jack';
+		}
+
 		setTimeout(() => {
-			fetch(process.env.REACT_APP_API + 'tweets/jack/')
+			fetch(process.env.REACT_APP_API + 'tweets/' + username + "/")
 				.then(response => this.retRes(response))
 				.then(data => {
 					console.log(data);
@@ -34,7 +47,7 @@ class Main extends React.Component {
 		}, 1000)
 
 		setTimeout(() => {
-			fetch(process.env.REACT_APP_API + 'user/jack/')
+			fetch(process.env.REACT_APP_API + 'user/' + username + "/")
 				.then(response => this.retRes(response))
 				.then(data => {
 					console.log(data);
@@ -89,6 +102,7 @@ class Main extends React.Component {
 				{userTile}
 				{disp}
 			</div>
+
 		)
 	}
 }
