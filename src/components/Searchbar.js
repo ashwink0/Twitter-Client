@@ -1,6 +1,6 @@
 import React from 'react'
 import './Tile.css'
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 
 
 class Searchbar extends React.Component{
@@ -39,7 +39,7 @@ class Searchbar extends React.Component{
 					value={this.state.name}
 				/>
 
-				<input type={'submit'} className={'SubmitTile'} onClick={this.handleSubmit}/>
+				<Link className={'SubmitTile'} to={"/" + this.state.name}>Search</Link>
 				{this.state.redir}
 			</div>
 		);

@@ -53,8 +53,10 @@
     outline: none;
 }
 .SubmitTile{
+    display: flex;
+    flex-direction: column;
     margin-left: -50px;
-    margin-top: 0px;
+    margin-top: 1px;
     height: 55px;
     width: 12%;
     background: blue;
@@ -64,6 +66,9 @@
     border-bottom-right-radius: 10px;
     cursor: pointer;
     font-size: 2vw;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
 }
 .SubmitTile:focus{
     outline: none;
