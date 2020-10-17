@@ -1,28 +1,22 @@
 import React from 'react'
 import './Tile.css'
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect, Link, Route} from 'react-router-dom';
+import Main from "../views/Main";
 
 
 class Searchbar extends React.Component{
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state={
 			name:"",
 			redir: <div></div>
 		}
 		this.handleChange=this.handleChange.bind(this)
-		this.handleSubmit=this.handleSubmit.bind(this)
 
 	}
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
-		})
-	}
-
-	handleSubmit(){
-		this.setState({
-			redir: <Redirect to={"/"+this.state.name}/>
 		})
 	}
 
@@ -38,9 +32,7 @@ class Searchbar extends React.Component{
 					onChange={this.handleChange}
 					value={this.state.name}
 				/>
-
 				<Link className={'SubmitTile'} to={"/" + this.state.name}>Search</Link>
-				{this.state.redir}
 			</div>
 		);
 	}

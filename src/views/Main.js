@@ -3,6 +3,13 @@ import '../App.css';
 import {CircularProgress, LinearProgress} from '@material-ui/core';
 import TweetTile from "../components/TweetTile";
 import AccountTile from "../components/AccountTile";
+import Fab from '@material-ui/core/Fab';
+import HomeIcon from '@material-ui/icons/Home';
+import HomeScreen from "./HomeScreen";
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import {isMobile} from 'react-device-detect';
+import {Redirect, Link} from 'react-router-dom';
+import Searchbar from "../components/Searchbar";
 
 require('dotenv').config()
 
@@ -16,21 +23,20 @@ class Main extends React.Component {
 			ready: false,
 			readyUser: false,
 
-			passedUser:false
+			passedUser: false
 		}
 	}
 
 	componentDidMount() {
 		let username;
-		if(this.props.match.params.username){
-			username=this.props.match.params.username;
+		if (this.props.match.params.username) {
+			username = this.props.match.params.username;
 			this.setState({
-				passedUser:true
+				passedUser: true
 			})
-		}
-		else{
+		} else {
 			//temp
-			username='jack';
+			username = 'jack';
 		}
 
 		setTimeout(() => {
@@ -44,7 +50,7 @@ class Main extends React.Component {
 					})
 
 				})
-		}, 1000)
+		}, 1)
 
 		setTimeout(() => {
 			fetch(process.env.REACT_APP_API + 'user/' + username + "/")
@@ -57,7 +63,7 @@ class Main extends React.Component {
 					})
 
 				})
-		}, 1000)
+		}, 1)
 	}
 
 	retRes(response) {
@@ -68,6 +74,10 @@ class Main extends React.Component {
 		return response.json()
 	}
 
+	fabGoBack() {
+		this.props.history.goBack()
+	}
+
 	render() {
 		let disp;
 
@@ -75,30 +85,31 @@ class Main extends React.Component {
 
 		if (this.state.response === 0) {
 			disp = <CircularProgress/>
-		}
-		else if (this.state.response !== 200) {
+		} else if (this.state.response !== 200) {
 			disp = <h1>Error Code: {this.state.response}</h1>
-		}
-		else if (this.state.ready && this.state.readyUser) {
+		} else if (this.state.ready && this.state.readyUser) {
 
 			if (this.state.tweets.meta.result_count === 0) {
 				disp = <h1>No Tweets</h1>
-			}
-			else {
+			} else {
 				disp = this.state.tweets.data.map(item =>
 					<TweetTile data={item}/>
 				)
 			}
 
-			if(this.state.user.errors){{
-				userTile=<h1>User not Found</h1>
-			}}
-			else {
+			if (this.state.user.errors) {
+				{
+					userTile = <h1>User not Found</h1>
+				}
+			} else {
 				userTile = <AccountTile data={this.state.user}/>
 			}
 		}
 		return (
 			<div className={'App-header'}>
+				{isMobile ? <Fab onClick={() => this.fabGoBack()} color={'black'} style={{position: 'absolute', left: 5, top: 5}}><ArrowBackIosIcon/></Fab> : <div/>}
+				{isMobile ? <Fab onClick={() => this.fabGoBack()} color={'black'} style={{position: 'absolute', left: 70, top: 5}}><HomeIcon/></Fab> : <div/>}
+				<Searchbar route={'main'}/>
 				{userTile}
 				{disp}
 			</div>
@@ -106,4 +117,5 @@ class Main extends React.Component {
 		)
 	}
 }
+
 export default Main;

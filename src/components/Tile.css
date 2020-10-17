@@ -43,7 +43,7 @@
     padding: 10px;
 }
 .Searchbar{
-    width: 40%;
+    width: 35%;
     height: 50px;
     border-radius: 10px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
@@ -55,7 +55,7 @@
 .SubmitTile{
     display: flex;
     flex-direction: column;
-    margin-left: -50px;
+    margin-left: -10px;
     margin-top: 1px;
     height: 55px;
     width: 12%;
