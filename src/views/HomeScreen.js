@@ -72,7 +72,12 @@ class HomeScreen extends React.Component {
 
 
 		if (this.state.readyTrends) {
-			trends = this.state.trends[0].trends.map(item => <h1>{item.name}</h1>)
+			if(this.state.trends.errors){
+				trends=<h1>Rate Limit Exceeded</h1>
+			}
+			else{
+				trends = this.state.trends[0].trends.map(item => <h1>{item.name}</h1>)
+			}
 		}
 		else {
 			trends = <CircularProgress />
