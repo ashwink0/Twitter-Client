@@ -1,7 +1,7 @@
 import React from 'react';
 import Searchbar from "../components/Searchbar";
-import { Link } from "react-router-dom";
 import { CircularProgress } from '@material-ui/core';
+import TrendingTile from '../components/TrendingTile'
 
 class HomeScreen extends React.Component {
 	constructor(props) {
@@ -15,7 +15,7 @@ class HomeScreen extends React.Component {
 			readyTrends: false,
 
 			availableIndex: 0,
-			locationIndex:0,
+			locationIndex: 0,
 		}
 	}
 	retRes(response) {
@@ -67,20 +67,20 @@ class HomeScreen extends React.Component {
 			disp = <h1>Trends for {this.state.trendsLocation[this.state.locationIndex].name}</h1>
 		}
 		else {
-			disp = <CircularProgress />
+			disp = <CircularProgress style={{padding: '10px'}}/>
 		}
 
 
 		if (this.state.readyTrends) {
-			if(this.state.trends.errors){
-				trends=<h1>Rate Limit Exceeded</h1>
+			if (this.state.trends.errors) {
+				trends = <h1>Rate Limit Exceeded</h1>
 			}
-			else{
-				trends = this.state.trends[0].trends.map(item => <h1>{item.name}</h1>)
+			else {
+				trends = this.state.trends[0].trends.map(item => <TrendingTile data={item} />)
 			}
 		}
 		else {
-			trends = <CircularProgress />
+			trends = <CircularProgress style={{padding: '10px'}}/>
 		}
 
 
@@ -91,7 +91,7 @@ class HomeScreen extends React.Component {
 				<h2>Trending:</h2>
 				<button onClick={() => {
 					this.setState({
-						locationIndex: this.state.locationIndex+1
+						locationIndex: this.state.locationIndex + 1
 					})
 					this.fetchTrends(this.state.trendsLocation[this.state.locationIndex].woeid)
 

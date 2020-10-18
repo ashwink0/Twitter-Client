@@ -12,6 +12,8 @@
 	transition: transform 0.5s;
     min-width: 300px;
     text-overflow: ellipsis;
+    min-width: 300px;
+
 }
 .TweetTileContainer{
     padding: 10px;
@@ -29,6 +31,8 @@
     align-items: center;
     height: 100px;
     margin: 0px;
+    min-width: 300px;
+
 }
 .AccountTileUserImage{
     width: 70px;
@@ -79,4 +83,35 @@
     justify-content: center;
     width: 95%;
     padding: 10px;
+}
+
+.TrendTile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid dimgrey;
+	border-radius: 5px;
+	width: 100%;
+	font-size: calc(5px + 2vmin);
+	color: white;
+	background-color: dimgrey;
+	cursor: pointer;
+	transition: transform 0.5s;
+    text-overflow: ellipsis;
+}
+.TrendTileContainer{
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+.AnchorTrend{
+    width: 45%;
+    min-width: 300px;
+    text-decoration: none;
 }
