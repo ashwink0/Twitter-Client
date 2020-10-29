@@ -97,18 +97,24 @@ class Main extends React.Component {
 				)
 			}
 
-			if (this.state.user.errors) {
-				{
+			if(this.state.user.errors){
+
 					userTile = <h1>User not Found</h1>
-				}
-			} else {
+
+			}
+			else {
 				userTile = <AccountTile data={this.state.user}/>
 			}
 		}
 		return (
 			<div className={'App-header'}>
-				{isMobile ? <Fab onClick={() => this.fabGoBack()} color={'black'} style={{position: 'absolute', left: 5, top: 5}}><ArrowBackIosIcon/></Fab> : <div/>}
-				{isMobile ? <Fab onClick={() => this.fabGoBack()} color={'black'} style={{position: 'absolute', left: 70, top: 5}}><HomeIcon/></Fab> : <div/>}
+				{isMobile ? <Fab
+										onClick={() => this.fabGoBack()}
+										color={'black'}
+										style={{position: 'absolute', left: 70, top: 5}}>
+										<ArrowBackIosIcon/>
+									</Fab> : <div/>}
+				<Fab href='/' color={'black'} style={{position: 'absolute', left: 5, top: 5}}><HomeIcon/></Fab>
 				<Searchbar route={'main'}/>
 				{userTile}
 				{disp}

@@ -3,6 +3,8 @@ import Searchbar from "../components/Searchbar";
 import { CircularProgress } from '@material-ui/core';
 import TrendingTile from '../components/TrendingTile'
 
+import SelectSearch from 'react-select-search';
+
 class HomeScreen extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,6 +18,8 @@ class HomeScreen extends React.Component {
 
 			availableIndex: 0,
 			locationIndex: 0,
+
+			options: {},
 		}
 	}
 	retRes(response) {
@@ -34,12 +38,17 @@ class HomeScreen extends React.Component {
 					trendsLocation: data,
 					readyAvailable: true,
 				})
+				var locations={}
+
+
+
 				this.setState({
 					availableIndex: this.state.trendsLocation[0].woeid,
 
 				})
 				this.fetchTrends(this.state.availableIndex);
 			})
+
 	}
 
 	fetchTrends(woeid) {
@@ -58,6 +67,10 @@ class HomeScreen extends React.Component {
 			})
 	}
 
+	handlePickerChange() {
+
+	}
+
 	render() {
 		var disp;
 		var trends;
@@ -67,7 +80,7 @@ class HomeScreen extends React.Component {
 			disp = <h1>Trends for {this.state.trendsLocation[this.state.locationIndex].name}</h1>
 		}
 		else {
-			disp = <CircularProgress style={{padding: '10px'}}/>
+			disp = <CircularProgress style={{ padding: '10px' }} />
 		}
 
 
@@ -80,15 +93,17 @@ class HomeScreen extends React.Component {
 			}
 		}
 		else {
-			trends = <CircularProgress style={{padding: '10px'}}/>
+			trends = <CircularProgress style={{ padding: '10px' }} />
 		}
 
 
 		return (
 			<div className={'App-header'}>
 				<h1>Twitter Client</h1>
-				<Searchbar route={'home'} />
+				<Searchbar/>
 				<h2>Trending:</h2>
+				<SelectSearch options={this.state.options} value="sv" name="language" placeholder="a" />
+
 				<button onClick={() => {
 					this.setState({
 						locationIndex: this.state.locationIndex + 1
@@ -96,6 +111,7 @@ class HomeScreen extends React.Component {
 					this.fetchTrends(this.state.trendsLocation[this.state.locationIndex].woeid)
 
 				}}>Next</button>
+
 				{disp}
 				{trends}
 			</div>

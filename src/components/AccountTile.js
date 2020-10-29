@@ -3,9 +3,6 @@ import verified from '../assets/verified_badge.svg'
 import './Tile.css'
 
 class AccountTile extends React.Component{
-	constructor(props) {
-		super(props);
-	}
 	preventDragHandler = (e) => {
 		e.preventDefault();
 	}
