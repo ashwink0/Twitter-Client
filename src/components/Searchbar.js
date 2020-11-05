@@ -32,7 +32,7 @@ class Searchbar extends React.Component{
 					onChange={this.handleChange}
 					value={this.state.name}
 				/>
-				<Link className={'SubmitTile'} to={"/" + this.state.name}>Search</Link>
+				<Link className={'SubmitTile'} to={"/user/" + this.state.name}>Search</Link>
 			</div>
 		);
 	}

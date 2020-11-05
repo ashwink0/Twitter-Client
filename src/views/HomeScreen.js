@@ -4,6 +4,18 @@ import { CircularProgress } from '@material-ui/core';
 import TrendingTile from '../components/TrendingTile'
 
 import SelectSearch from 'react-select-search';
+import Button from "@material-ui/core/Button";
+const options = [
+	{name: 'Swedish', value: 'sv'},
+	{name: 'English', value: 'en'},
+	{
+		type: 'group',
+		name: 'Group name',
+		items: [
+			{name: 'Spanish', value: 'es'},
+		]
+	},
+];
 
 class HomeScreen extends React.Component {
 	constructor(props) {
@@ -22,6 +34,7 @@ class HomeScreen extends React.Component {
 			options: {},
 		}
 	}
+
 	retRes(response) {
 		this.setState({
 			response: response.status
@@ -30,6 +43,11 @@ class HomeScreen extends React.Component {
 	}
 
 	componentDidMount() {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			console.log("Latitude is :", position.coords.latitude);
+			console.log("Longitude is :", position.coords.longitude);
+		});
+
 		fetch(process.env.REACT_APP_API + 'trendingAvailable/')
 			.then(response => this.retRes(response))
 			.then(data => {
@@ -39,8 +57,6 @@ class HomeScreen extends React.Component {
 					readyAvailable: true,
 				})
 				var locations={}
-
-
 
 				this.setState({
 					availableIndex: this.state.trendsLocation[0].woeid,
@@ -101,9 +117,10 @@ class HomeScreen extends React.Component {
 			<div className={'App-header'}>
 				<h1>Twitter Client</h1>
 				<Searchbar/>
+				<Button variant="contained" href={'/archive'}>
+					Trend Archive
+				</Button>
 				<h2>Trending:</h2>
-				<SelectSearch options={this.state.options} value="sv" name="language" placeholder="a" />
-
 				<button onClick={() => {
 					this.setState({
 						locationIndex: this.state.locationIndex + 1
