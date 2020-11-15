@@ -1,15 +1,13 @@
 import React from 'react';
 import '../App.css';
-import {CircularProgress, LinearProgress} from '@material-ui/core';
+import {CircularProgress} from '@material-ui/core';
 import TweetTile from "../components/TweetTile";
 import AccountTile from "../components/AccountTile";
 import Fab from '@material-ui/core/Fab';
 import HomeIcon from '@material-ui/icons/Home';
-import HomeScreen from "./HomeScreen";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {isMobile} from 'react-device-detect';
-import {Redirect, Link} from 'react-router-dom';
-import Searchbar from "../components/Searchbar";
+
 
 require('dotenv').config()
 
@@ -34,16 +32,12 @@ class Main extends React.Component {
 			this.setState({
 				passedUser: true
 			})
-		} else {
-			//temp
-			username = 'jack';
 		}
 
 		setTimeout(() => {
 			fetch(process.env.REACT_APP_API + 'tweets/' + username + "/")
 				.then(response => this.retRes(response))
 				.then(data => {
-					console.log(data);
 					this.setState({
 						tweets: data,
 						ready: true
@@ -56,7 +50,6 @@ class Main extends React.Component {
 			fetch(process.env.REACT_APP_API + 'user/' + username + "/")
 				.then(response => this.retRes(response))
 				.then(data => {
-					console.log(data);
 					this.setState({
 						user: data,
 						readyUser: true
@@ -67,7 +60,6 @@ class Main extends React.Component {
 	}
 
 	retRes(response) {
-		console.log(response.status)
 		this.setState({
 			response: response.status
 		})
@@ -115,7 +107,6 @@ class Main extends React.Component {
 										<ArrowBackIosIcon/>
 									</Fab> : <div/>}
 				<Fab href='/' color={'black'} style={{position: 'absolute', left: 5, top: 5}}><HomeIcon/></Fab>
-				<Searchbar route={'main'}/>
 				{userTile}
 				{disp}
 			</div>

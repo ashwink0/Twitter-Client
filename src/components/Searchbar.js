@@ -1,7 +1,6 @@
 import React from 'react'
 import './Tile.css'
-import {Redirect, Link, Route} from 'react-router-dom';
-import Main from "../views/Main";
+import {Redirect, Link} from 'react-router-dom';
 
 
 class Searchbar extends React.Component{
@@ -20,6 +19,14 @@ class Searchbar extends React.Component{
 		})
 	}
 
+	handleKeyPress = (event) => {
+		if(event.key === 'Enter'){
+			this.setState({
+				redir: <Redirect push to={"/user/" + this.state.name}/>
+			})
+		}
+	}
+
 	render(){
 
 		return(
@@ -31,8 +38,10 @@ class Searchbar extends React.Component{
 					className={'Searchbar'}
 					onChange={this.handleChange}
 					value={this.state.name}
+					onKeyPress={this.handleKeyPress}
 				/>
 				<Link className={'SubmitTile'} to={"/user/" + this.state.name}>Search</Link>
+				{this.state.redir}
 			</div>
 		);
 	}

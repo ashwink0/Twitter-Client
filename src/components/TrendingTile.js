@@ -7,8 +7,8 @@ class TrendingTile extends React.Component {
 			<div className={'TrendTileContainer'}>
 				<a href={this.props.data.url} className="AnchorTrend">
 					<div className={'TrendTile'}>
-						<div style={{ padding: '20px' }}>
-							<h1>{this.props.data.name.substring(0,18)}</h1>
+						<div style={{ padding: '20px', wordWrap: 'break-word' }}>
+							<h1>{this.props.data.name}</h1>
 							{this.props.data.tweet_volume != null ? <h3>Tweet Volume: {this.props.data.tweet_volume}</h3> : <div/>}
 						</div>
 					</div>

@@ -5,17 +5,9 @@ import TrendingTile from '../components/TrendingTile'
 
 import SelectSearch from 'react-select-search';
 import Button from "@material-ui/core/Button";
-const options = [
-	{name: 'Swedish', value: 'sv'},
-	{name: 'English', value: 'en'},
-	{
-		type: 'group',
-		name: 'Group name',
-		items: [
-			{name: 'Spanish', value: 'es'},
-		]
-	},
-];
+import SkeletonTrendTile from "../components/Skeleton/SkeletonTrendTile";
+import './selectSearch.css'
+
 
 class HomeScreen extends React.Component {
 	constructor(props) {
@@ -31,7 +23,8 @@ class HomeScreen extends React.Component {
 			availableIndex: 0,
 			locationIndex: 0,
 
-			options: {},
+			options: [
+			],
 		}
 	}
 
@@ -51,18 +44,25 @@ class HomeScreen extends React.Component {
 		fetch(process.env.REACT_APP_API + 'trendingAvailable/')
 			.then(response => this.retRes(response))
 			.then(data => {
-				console.log(data);
 				this.setState({
 					trendsLocation: data,
 					readyAvailable: true,
 				})
-				var locations={}
-
 				this.setState({
 					availableIndex: this.state.trendsLocation[0].woeid,
 
 				})
 				this.fetchTrends(this.state.availableIndex);
+
+				var options=[]
+
+				for(var i=0; i<this.state.trendsLocation.length; i++){
+					options.push({name: this.state.trendsLocation[i].name, value: i})
+				}
+
+				this.setState({
+					options: options
+				})
 			})
 
 	}
@@ -74,7 +74,6 @@ class HomeScreen extends React.Component {
 		fetch(process.env.REACT_APP_API + 'trends/' + woeid)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data);
 				this.setState({
 					trends: data,
 					readyTrends: true,
@@ -83,16 +82,16 @@ class HomeScreen extends React.Component {
 			})
 	}
 
-	handlePickerChange() {
-
-	}
+	onSelectChange = value => {
+		this.setState({locationIndex: value });
+		this.fetchTrends(this.state.trendsLocation[this.state.locationIndex].woeid)
+	};
 
 	render() {
 		var disp;
 		var trends;
 
 		if (this.state.readyAvailable) {
-			//disp=this.state.trendsLocation.map(item => <h1>{item.woeid}</h1>)
 			disp = <h1>Trends for {this.state.trendsLocation[this.state.locationIndex].name}</h1>
 		}
 		else {
@@ -109,7 +108,15 @@ class HomeScreen extends React.Component {
 			}
 		}
 		else {
-			trends = <CircularProgress style={{ padding: '10px' }} />
+			trends = <div style={{width: '45%', height: '150px'}}>
+				<SkeletonTrendTile/>
+				<SkeletonTrendTile/>
+				<SkeletonTrendTile/>
+				<SkeletonTrendTile/>
+				<SkeletonTrendTile/>
+				<SkeletonTrendTile/>
+				<SkeletonTrendTile/>
+			</div>
 		}
 
 
@@ -121,14 +128,10 @@ class HomeScreen extends React.Component {
 					Trend Archive
 				</Button>
 				<h2>Trending:</h2>
-				<button onClick={() => {
-					this.setState({
-						locationIndex: this.state.locationIndex + 1
-					})
-					this.fetchTrends(this.state.trendsLocation[this.state.locationIndex].woeid)
 
-				}}>Next</button>
-
+				<div>
+					<SelectSearch search options={this.state.options} onChange={this.onSelectChange}  name="language" placeholder="Choose a Location" />
+				</div>
 				{disp}
 				{trends}
 			</div>
