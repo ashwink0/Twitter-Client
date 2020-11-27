@@ -8,12 +8,15 @@ class AccountTile extends React.Component{
 	}
 
 	render() {
-		return(
+		return (
 			<div>
 				<div className={'AccountTile'}>
-					<img alt={'Profile'} src={this.props.data.profile_image_url} className={'AccountTileUserImage'} onDragStart={this.preventDragHandler}/>
+					<img alt={'Profile'} src={this.props.data.profile_image_url} className={'AccountTileUserImage'}
+							 onDragStart={this.preventDragHandler}/>
 					<h1>{this.props.data.name}</h1>
-					{this.props.data.verified ? <img alt={'verified'} src={verified} className={'VerifiedImage'} onDragStart={this.preventDragHandler}/> : <div/>}
+					{this.props.data.verified ?
+						<img alt={'verified'} src={verified} className={'VerifiedImage'} onDragStart={this.preventDragHandler}/> :
+						<div/>}
 				</div>
 				<p style={{margin: '0px', fontSize: '15px'}}>@{this.props.data.screen_name}</p>
 				<p style={{margin: '0px'}}>{this.props.data.description}</p>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import DatePicker from 'react-date-picker';
 
 const MyApp = (props) => {
@@ -8,7 +8,7 @@ const MyApp = (props) => {
 		<div style={{backgroundColor: 'grey', margin: '20px'}}>
 			<DatePicker
 				onChange={(value) => {
-					if(value !==null){
+					if(value !== null){
 						props.dateChange(value)
 						changeDate(value)
 					}

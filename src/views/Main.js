@@ -8,10 +8,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import {isMobile} from 'react-device-detect';
 
-
 require('dotenv').config()
 
-class Main extends React.Component {
+class Main extends React.Component{
 	constructor() {
 		super();
 		this.state = {
@@ -20,14 +19,13 @@ class Main extends React.Component {
 			response: 0,
 			ready: false,
 			readyUser: false,
-
 			passedUser: false
 		}
 	}
 
 	componentDidMount() {
 		let username;
-		if (this.props.match.params.username) {
+		if(this.props.match.params.username){
 			username = this.props.match.params.username;
 			this.setState({
 				passedUser: true
@@ -75,15 +73,18 @@ class Main extends React.Component {
 
 		let userTile;
 
-		if (this.state.response === 0) {
+		if(this.state.response === 0){
 			disp = <CircularProgress/>
-		} else if (this.state.response !== 200) {
+		}
+		else if(this.state.response !== 200){
 			disp = <h1>Error Code: {this.state.response}</h1>
-		} else if (this.state.ready && this.state.readyUser) {
+		}
+		else if(this.state.ready && this.state.readyUser){
 
-			if (this.state.tweets.meta.result_count === 0) {
+			if(this.state.tweets.meta.result_count === 0){
 				disp = <h1>No Tweets</h1>
-			} else {
+			}
+			else{
 				disp = this.state.tweets.data.map(item =>
 					<TweetTile data={item}/>
 				)
@@ -91,21 +92,21 @@ class Main extends React.Component {
 
 			if(this.state.user.errors){
 
-					userTile = <h1>User not Found</h1>
+				userTile = <h1>User not Found</h1>
 
 			}
-			else {
+			else{
 				userTile = <AccountTile data={this.state.user}/>
 			}
 		}
 		return (
 			<div className={'App-header'}>
 				{isMobile ? <Fab
-										onClick={() => this.fabGoBack()}
-										color={'black'}
-										style={{position: 'absolute', left: 70, top: 5}}>
-										<ArrowBackIosIcon/>
-									</Fab> : <div/>}
+					onClick={() => this.fabGoBack()}
+					color={'black'}
+					style={{position: 'absolute', left: 70, top: 5}}>
+					<ArrowBackIosIcon/>
+				</Fab> : <div/>}
 				<Fab href='/' color={'black'} style={{position: 'absolute', left: 5, top: 5}}><HomeIcon/></Fab>
 				{userTile}
 				{disp}

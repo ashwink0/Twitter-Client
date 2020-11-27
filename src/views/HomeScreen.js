@@ -1,6 +1,6 @@
 import React from 'react';
 import Searchbar from "../components/Searchbar";
-import { CircularProgress } from '@material-ui/core';
+import {CircularProgress} from '@material-ui/core';
 import TrendingTile from '../components/TrendingTile'
 
 import SelectSearch from 'react-select-search';
@@ -9,7 +9,7 @@ import SkeletonTrendTile from "../components/Skeleton/SkeletonTrendTile";
 import './selectSearch.css'
 
 
-class HomeScreen extends React.Component {
+class HomeScreen extends React.Component{
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -23,8 +23,7 @@ class HomeScreen extends React.Component {
 			availableIndex: 0,
 			locationIndex: 0,
 
-			options: [
-			],
+			options: [],
 		}
 	}
 
@@ -54,9 +53,9 @@ class HomeScreen extends React.Component {
 				})
 				this.fetchTrends(this.state.availableIndex);
 
-				var options=[]
+				var options = []
 
-				for(var i=0; i<this.state.trendsLocation.length; i++){
+				for(var i = 0; i < this.state.trendsLocation.length; i++){
 					options.push({name: this.state.trendsLocation[i].name, value: i})
 				}
 
@@ -83,7 +82,7 @@ class HomeScreen extends React.Component {
 	}
 
 	onSelectChange = value => {
-		this.setState({locationIndex: value });
+		this.setState({locationIndex: value});
 		this.fetchTrends(this.state.trendsLocation[this.state.locationIndex].woeid)
 	};
 
@@ -91,23 +90,23 @@ class HomeScreen extends React.Component {
 		var disp;
 		var trends;
 
-		if (this.state.readyAvailable) {
+		if(this.state.readyAvailable){
 			disp = <h1>Trends for {this.state.trendsLocation[this.state.locationIndex].name}</h1>
 		}
-		else {
-			disp = <CircularProgress style={{ padding: '10px' }} />
+		else{
+			disp = <CircularProgress style={{padding: '10px'}}/>
 		}
 
 
-		if (this.state.readyTrends) {
-			if (this.state.trends.errors) {
+		if(this.state.readyTrends){
+			if(this.state.trends.errors){
 				trends = <h1>Rate Limit Exceeded</h1>
 			}
-			else {
-				trends = this.state.trends[0].trends.map(item => <TrendingTile data={item} />)
+			else{
+				trends = this.state.trends[0].trends.map(item => <TrendingTile data={item}/>)
 			}
 		}
-		else {
+		else{
 			trends = <div style={{width: '45%', height: '150px'}}>
 				<SkeletonTrendTile/>
 				<SkeletonTrendTile/>
@@ -130,7 +129,8 @@ class HomeScreen extends React.Component {
 				<h2>Trending:</h2>
 
 				<div>
-					<SelectSearch search options={this.state.options} onChange={this.onSelectChange}  name="language" placeholder="Choose a Location" />
+					<SelectSearch search options={this.state.options} onChange={this.onSelectChange} name="language"
+												placeholder="Choose a Location"/>
 				</div>
 				{disp}
 				{trends}

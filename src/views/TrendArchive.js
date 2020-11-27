@@ -10,6 +10,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MyApp from "../components/Cal";
+
 const YAML = require('json-to-pretty-yaml');
 var fileDownload = require('react-file-download');
 
@@ -63,13 +64,14 @@ class TrendArchive extends React.Component{
 			})
 	}
 
-	downloadJSON(){
+	downloadJSON() {
 		fileDownload(JSON.stringify(this.state.trendData), this.state.slug + '.json');
 	}
 
-	downloadYAML(){
+	downloadYAML() {
 		fileDownload(YAML.stringify(this.state.trendData), this.state.slug + '.yaml');
 	}
+
 	render() {
 		let testDisp = <CircularProgress/>;
 		if(this.state.ready){
@@ -119,11 +121,11 @@ class TrendArchive extends React.Component{
 					{this.state.ready ? <div>
 							<Button
 								style={{margin: '5px'}}
-							variant="contained" color="primary"
-							onClick={() => this.downloadJSON()}
-						>
-							{'Download JSON'}
-						</Button>
+								variant="contained" color="primary"
+								onClick={() => this.downloadJSON()}
+							>
+								{'Download JSON'}
+							</Button>
 
 							<Button
 								style={{margin: '5px'}}

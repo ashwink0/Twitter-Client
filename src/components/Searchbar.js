@@ -6,13 +6,14 @@ import {Redirect, Link} from 'react-router-dom';
 class Searchbar extends React.Component{
 	constructor(props) {
 		super(props);
-		this.state={
-			name:"",
+		this.state = {
+			name: "",
 			redir: <div></div>
 		}
-		this.handleChange=this.handleChange.bind(this)
+		this.handleChange = this.handleChange.bind(this)
 
 	}
+
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -27,9 +28,9 @@ class Searchbar extends React.Component{
 		}
 	}
 
-	render(){
+	render() {
 
-		return(
+		return (
 			<div className={'SearchbarDiv'}>
 				<input
 					type={'text'}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 	},
 }));
-const anchorText='This is a Twitter trends archiving system. You can search for trends from a specific date or location';
+const anchorText = 'This is a Twitter trends archiving system. You can search for trends from a specific date or location. Data collection is currently not being hosted.';
 
 export default function Information() {
 	const classes = useStyles();
