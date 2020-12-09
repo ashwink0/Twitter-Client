@@ -7,8 +7,6 @@ import CachedIcon from '@material-ui/icons/Cached';
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Divider from "@material-ui/core/Divider";
 
-// getSentiment expects an array of strings
-
 class TweetTile extends React.Component{
 	constructor(props) {
 		super(props);

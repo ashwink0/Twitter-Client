@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: theme.spacing(2),
 	},
 }));
-const anchorText = 'This is a Twitter trends archiving system. You can search for trends from a specific date or location. Data collection is currently not being hosted.';
+const anchorText = 'This is a Twitter trends archiving system. You can search for trends from a specific date or location. Data collection is currently not being hosted. Example data is available for November 11, 2020.';
 
 export default function Information() {
 	const classes = useStyles();
